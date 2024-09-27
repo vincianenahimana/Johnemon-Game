@@ -121,32 +121,100 @@ function heal(callback) {
   });
 }
 
+function revive(callback) {
+  rl.question("Which Johnemon do you want to revive? ", (answer) => {
+    johnemonMaster.reviveJohnemon(answer);
+    const log = `${answer} has revive`;
+    johnemonWorld.addLog(log);
+    callback();
+  });
+}
+
+function release(callbask) {
+  rl.question("Which Johnemon do you want to release? ", (answer) => {
+    johnemonMaster.releaseJohnemon(answer);
+    const log = `${answer} has been released`;
+    johnemonWorld.addLog(log);
+    callback();
+  });
+}
+
+function rename(callback) {
+  rl.question("Which Johnemon do you want to rename? ", (oldname) => {
+    rl.question("What is the new name? ", (newname) => {
+      johnemonMaster.renameJohnemon(oldname, newname);
+      const log = `${oldname} has been renamed`;
+      johnemonWorld.addLog(log);
+      callback();
+    });
+  });
+}
+
+function nothing(callback) {
+  johnemonWorld.oneDayPasses();
+}
+
 function johnemonTown() {
   johnemonWorld.oneDayPasses();
-  console.log(`Day: ${johnemonWorld.day} in JohnemonTown`);
+  console.log(`Day: ${johnemonWorld.day} in Johnemon Town`);
   console.log("What do you want to do Today?");
+  askForOptionJohnemonTown();
+}
+
+function askForOptionJohnemonTown() {
   console.log("1. Heal Johnemon™ ");
   console.log("2. Revive Johnemon™ ");
-  console.log("3. release Johnemon™");
-  console.log("4. rename Johnemon™");
-  console.log("5. Do nothing");
+  console.log("3. Release Johnemon™");
+  console.log("4. Rename Johnemon™");
 
-  rl.question("Choose an option (1-5): ", (answer) => {
+  rl.question("Choose an option (1-4): ", (answer) => {
     let option = parseInt(answer, 10);
     switch (option) {
       case 1:
         showCollectionJohnemons();
         heal(() => {
-          saveStateGame(() => {});
+          saveStateGame(() => {
+            continueGame();
+          });
         });
+        break;
 
+      case 2:
+        showCollectionJohnemons();
+        revive(() => {
+          saveStateGame(() => {
+            continueGame();
+          });
+        });
+        break;
+
+      case 3:
+        showCollectionJohnemons();
+        release(() => {
+          saveStateGame(() => {
+            continueGame();
+          });
+        });
+        break;
+
+      case 4:
+        showCollectionJohnemons();
+        rename(() => {
+          saveStateGame(() => {
+            continueGame();
+          });
+        });
         break;
 
       default:
+        console.log("Wrong number");
+        askForOptionJohnemonTown();
         break;
     }
   });
 }
+
+function chooseJohnemon() {}
 
 function loadPreviousGame() {
   console.log("Previous game found");
@@ -169,15 +237,40 @@ function loadPreviousGame() {
 }
 
 function continueGame() {
-  rl.question("Do you want to continue? Yes/No", (answer) => {
+  rl.question("Do you want to continue? Yes/No: ", (answer) => {
     let choice = answer.toLowerCase(answer);
+    if (choice === "yes" || choice === "y") {
+      console.log("What do you want to do next?");
+      console.log("1. Stay in the Johnemon Town");
+      console.log("2. Choose a Johnemon");
+
+      rl.question("Choose an option (1-2): ", (answer) => {
+        let option = parseInt(answer);
+        if (option === 1) {
+          johnemonTown();
+        } else if (option === 2) {
+          chooseJohnemon();
+        } else {
+          console.error("Wrong number, choose again");
+          continueGame();
+        }
+      });
+    } else if (choice === "no" || choice === "n") {
+      saveStateGame(() => {
+        rl.close();
+      });
+    } else {
+      continueGame();
+    }
   });
 }
 
 function newGame() {
   askForName(() => {
     proposeFirstJohnemon(() => {
-      saveStateGame(() => {});
+      saveStateGame(() => {
+        johnemonTown(() => {});
+      });
     });
   });
 }

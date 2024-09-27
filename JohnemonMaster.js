@@ -12,21 +12,21 @@ class JohnemonMaster {
   }
 
   renameJohnemon(johnemon, newName) {
-    const johnemonIndex = this.johnemonCollection.findIndex(
-      (j) => j === johnemon
+    const selectedJohnemon = this.johnemonCollection.find(
+      (j) => j.name === johnemon
     );
 
-    if (johnemonIndex !== -1) {
-      this.johnemonCollection[johnemonIndex] = newName;
-      console.log(`${johnemon} is now renamed to ${newName}`);
+    if (selectedJohnemon !== undefined) {
+      selectedJohnemon.name = newName;
+      console.warn(`${johnemon} has been renamed`);
     } else {
-      console.log("Didn't find Johnemon with that name");
+      console.error(`Sorry ${johnemon} doesn't exist in the collection`);
     }
   }
 
   healJohnemon(johnemon) {
     if (this.healingItems > 0) {
-      let selectedJohnemon = this.johnemonCollection.find(
+      const selectedJohnemon = this.johnemonCollection.find(
         (j) => j.name === johnemon
       );
       if (selectedJohnemon !== undefined) {
@@ -43,26 +43,42 @@ class JohnemonMaster {
         console.error(`Sorry ${johnemon} doesn't exist in the collection`);
       }
     } else {
-      console.log("Sorry you used up all your healing items");
+      console.log("Sorry you've used up all your healing items");
     }
   }
 
   reviveJohnemon(johnemon) {
-    if (this.reviveItems > 0) {
-      johnemon.healthPool = johnemon.healthPoolStart;
-      console.log(`Your Johnemon ${johnemon} is reviving`);
-      this.reviveItems--;
+    if (this.reviveItemsItems > 0) {
+      const selectedJohnemon = this.johnemonCollection.find(
+        (j) => j.name === johnemon
+      );
+      if (selectedJohnemon !== undefined) {
+        if (selectedJohnemon.healthPool < selectedJohnemon.healthPoolStart) {
+          selectedJohnemon.healthPool = selectedJohnemon.healthPoolStart;
+          this.reviveItemsItems--;
+          console.warn(
+            `${johnemon} has been revived and you still have ${this.reviveItems} revive items`
+          );
+        } else {
+          console.warn("the healthpool is maximum");
+        }
+      } else {
+        console.error(`Sorry ${johnemon} doesn't exist in the collection`);
+      }
     } else {
-      console.log(`You can't reviving your Johnemon`);
+      console.log("Sorry you've used up all your revive items");
     }
   }
 
   releaseJohnemon(johnemon) {
-    let index = this.johnemonCollection.indexOf(johnemon);
-    if (index !== -1) {
-      this.johnemonCollection.splice(index, 1);
+    const selectedJohnemon = this.johnemonCollection.find(
+      (j) => j.name === johnemon
+    );
+
+    if (selectedJohnemon !== undefined) {
+      this.johnemonCollection.filter((j) => j !== selectedJohnemon);
     } else {
-      console.log(`Sorry ${johnemon} doesn't exist in the collection`);
+      console.error(`Sorry ${johnemon} doesn't exist in the collection`);
     }
   }
 
