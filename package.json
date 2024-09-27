@@ -1,0 +1,22 @@
+{
+  "name": "10-01-javascript-recap-johnemon-vincianenahimana",
+  "version": "1.0.0",
+  "description": "## Overview",
+  "main": "Game.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/Junior-dev-Track/10-01-javascript-recap-johnemon-vincianenahimana.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Junior-dev-Track/10-01-javascript-recap-johnemon-vincianenahimana/issues"
+  },
+  "homepage": "https://github.com/Junior-dev-Track/10-01-javascript-recap-johnemon-vincianenahimana#readme",
+  "dependencies": {
+    "require": "^0.4.4"
+  }
+}

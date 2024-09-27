@@ -1,0 +1,26 @@
+{
+  "saved_on": "2024-09-27T10:55:39.714Z",
+  "JohnemonMaster": {
+    "name": "Vinci",
+    "johnemonCollection": [
+      {
+        "name": "Nahiien",
+        "level": 1,
+        "experienceMeter": 0,
+        "attackRange": 0,
+        "defenseRange": 1,
+        "healthPool": 22,
+        "healthPoolStart": 22,
+        "catchPhrase": "Let the battle begin!"
+      }
+    ],
+    "healingItems": 4,
+    "reviveItems": 3,
+    "JOHNEBALLS": 10
+  },
+  "day": 2,
+  "logs": [
+    "Day 1: Nahiien has been added to your collection!",
+    "Day 2: Nahiien been healed"
+  ]
+}

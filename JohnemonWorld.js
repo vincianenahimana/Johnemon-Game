@@ -1,24 +1,23 @@
-const JohnemonArena = require('./JohnemonArena')
-const Johnemon = require('./Johnemon')
-
+const JohnemonArena = require("./JohnemonArena");
+const Johnemon = require("./Johnemon");
 
 class JohnemonWorld {
   constructor() {
-   
+    this.day = 1;
+    this.logs = [];
   }
 
-  oneDayPasses(){
-    
-  }
-  
-  randomizeEvent() {
-     
+  oneDayPasses() {
+    this.day++;
+    return `Day ${this.day} has passed in JohnemonWorld!`;
   }
 
-  addLog(newLog){
-    
+  randomizeEvent() {}
+
+  addLog(newLog) {
+    const log = `Day ${this.day}: ${newLog}`;
+    this.logs.push(log);
   }
 }
 
-
-module.exports = JohnemonWorld
+module.exports = JohnemonWorld;

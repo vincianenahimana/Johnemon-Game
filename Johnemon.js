@@ -1,90 +1,102 @@
 const students = [
-  'Saks', 'hat',
-  'Thie', 'rry',
-  'Art', 'hur',
-  'Nou', 'héila',
-  'Yor', 'die',
-  'Si', 'mon',
-  'Nico', 'las',
-  'Alex', 'andre',
-  'Piet', 'ro',
-  'Ele', 'na',
-  'Jo', 'ao',
-  'Liv', 'iu',
-  'My', 'riam',
-  'Jor', 'dan',
-  'In', 'na',
-  'Haz', 'ar',
-  'Arg', 'jent',
-  'Antoi', 'ne-Alexandr',
-  'Ari', 'anne',
-  'Khy', 'ati',
-  'Den', 'is',
-  'Yul', 'iia',
-  'Do', 'ra',
-  'Jun', 'ior',
-  'Jessi', 'ca',
-  'Yav', 'anna',
-  'Lou', 'ise',
-  'Lí', 'lia',
-  'Jor', 'ina',
-  'Via', 'cheslav',
-  'Zach', 'arie',
-  'O', 'leg'
-]
+  "Olivia",
+  "Nora",
+  "Diana",
+  "Mohab",
+  "Lyne",
+  "Jason",
+  "Sebastien",
+  "Cristelle",
+  "Farid",
+  "Julien",
+  "Edouard",
+  "mbogle",
+  "Benjamin",
+  "Matteo",
+  "Reda",
+  "Donatien",
+  "Renaud",
+  "Antoine",
+  "Nahimana",
+  "Stéphen",
+  "Mohamed",
+  "Hakim",
+  "Pierre",
+  "Hugo",
+  "Theo",
+  "Maxime",
+];
 
 class Johnemon {
   constructor() {
-    this.name = this.generateRandomName();
+    this.name = this.generateName();
     this.level = 1;
     this.experienceMeter = 0;
     this.attackRange = this.getRandomNumber(1, 8);
     this.defenseRange = this.getRandomNumber(1, 3);
     this.healthPool = this.getRandomNumber(10, 30);
-    this.catchPhrase = this.generateCatchPhrase();
+    this.healthPoolStart = this.healthPool;
+    this.catchPhrase = this.catchUniquePhrase();
   }
 
-  generateRandomName() {
-    const randomStudent1 = students[Math.floor(Math.random() * students.length)];
-    const randomStudent2 = students[Math.floor(Math.random() * students.length)];
-    return `${randomStudent1}${randomStudent2}`;
+  generateName() {
+    const nameOne = students[Math.floor(Math.random() * students.length)];
+    let nameTwo = students[Math.floor(Math.random() * students.length)];
+    while (nameOne === nameTwo) {
+      nameTwo = students[Math.floor(Math.random() * students.length)];
+    }
+
+    const nameChoiceOne =
+      nameOne.slice(0, Math.floor(nameOne.length / 2)) +
+      nameTwo.slice(Math.floor(nameTwo.length / 2));
+    const nameChoiceTwo =
+      nameTwo.slice(0, Math.floor(nameTwo.length / 2)) +
+      nameOne.slice(Math.floor(nameOne.length / 2));
+
+    if (Math.random() > 0.5) {
+      return nameChoiceOne;
+    } else {
+      return nameChoiceTwo;
+    }
   }
 
   getRandomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  generateCatchPhrase() {
+  catchUniquePhrase() {
     const phrases = ["I choose you!", "Let the battle begin!", "Johnemon, go!"];
+
     return phrases[Math.floor(Math.random() * phrases.length)];
   }
 
   attack(defender) {
-    const damage = this.getRandomNumber(this.attackRange * this.level, this.attackRange) - defender.defenseRange;
+    const damage =
+      this.getRandomNumber(this.attackRange * this.level, this.attackRange) -
+      defender.defenseRange;
     defender.healthPool -= damage;
-    console.log(`${this.name} attacked ${defender.name} and dealt ${damage} damage!`);
+    console.log(
+      `${this.name} attacked ${defender.name} and dealt ${damage} damage!`
+    );
   }
 
-  gainExperience(opponentLevel) {
-    const experienceGain = this.getRandomNumber(1, 5) * opponentLevel;
+  gainExperience(oppositeLevel) {
+    const experienceGain = this.getRandomNumber(1, 5) * oppositeLevel;
     this.experienceMeter += experienceGain;
-    console.log(`${this.name} gained ${experienceGain} experience points!`);
+    console.log(`${this.name} gained ${experienceGain} experience points`);
     if (this.experienceMeter >= this.level * 100) {
       this.evolve();
     }
   }
-
   evolve() {
-    this.level += 1;
-    const attackIncrease = this.getRandomNumber(1, 5);
-    const defenseIncrease = this.getRandomNumber(1, 5);
-    const healthIncrease = this.getRandomNumber(1, 5);
+    this.level++;
+    this.attackRange += this.getRandomNumber(1, 5);
+    this.defenseRange += this.getRandomNumber(1, 5);
+    this.healthPool += this.getRandomNumber(1, 5);
 
-    this.attackRange += attackIncrease;
-    this.defenseRange += defenseIncrease;
-    this.healthPool += healthIncrease;
-
-    console.log(`${this.name} evolved into a higher level! New stats: Level ${this.level}, Attack Range ${this.attackRange}, Defense Range ${this.defenseRange}, Health Pool ${this.healthPool}`);
+    console.log(
+      `${this.name} evolved into a higher level! New stats: Level ${this.level}, Attack Range ${this.attackRange}, Defense Range ${this.defenseRange}, Health Pool ${this.healthPool}`
+    );
   }
 
   sayCatchPhrase() {
@@ -92,4 +104,4 @@ class Johnemon {
   }
 }
 
-module.exports = Johnemon
+module.exports = Johnemon;
