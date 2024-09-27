@@ -214,7 +214,24 @@ function askForOptionJohnemonTown() {
   });
 }
 
-function chooseJohnemon() {}
+function chooseJohnemon() {
+  showCollectionJohnemons();
+
+  rl.question("Choose a Johnemon", (answer) => {
+    const choice = parseInt(answer);
+
+    const selectedIndex = johnemonMaster.johnemonCollection.findIndex(choix);
+
+    if (selectedIndex != -1) {
+      selectedJohnemon = johnemonMaster.johnemonCollection[selectedIndex];
+    } else {
+      console.error("Try again ");
+      chooseJohnemon();
+    }
+  });
+}
+
+function generateJohnemon() {}
 
 function loadPreviousGame() {
   console.log("Previous game found");

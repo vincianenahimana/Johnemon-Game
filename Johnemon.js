@@ -71,32 +71,14 @@ class Johnemon {
   }
 
   attack(defender) {
-    const damage =
-      this.getRandomNumber(this.attackRange * this.level, this.attackRange) -
-      defender.defenseRange;
-    defender.healthPool -= damage;
-    console.log(
-      `${this.name} attacked ${defender.name} and dealt ${damage} damage!`
-    );
+
   }
 
   gainExperience(oppositeLevel) {
-    const experienceGain = this.getRandomNumber(1, 5) * oppositeLevel;
-    this.experienceMeter += experienceGain;
-    console.log(`${this.name} gained ${experienceGain} experience points`);
-    if (this.experienceMeter >= this.level * 100) {
-      this.evolve();
-    }
+
   }
   evolve() {
-    this.level++;
-    this.attackRange += this.getRandomNumber(1, 5);
-    this.defenseRange += this.getRandomNumber(1, 5);
-    this.healthPool += this.getRandomNumber(1, 5);
 
-    console.log(
-      `${this.name} evolved into a higher level! New stats: Level ${this.level}, Attack Range ${this.attackRange}, Defense Range ${this.defenseRange}, Health Pool ${this.healthPool}`
-    );
   }
 
   sayCatchPhrase() {
