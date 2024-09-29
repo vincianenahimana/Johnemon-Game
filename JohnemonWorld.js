@@ -12,11 +12,18 @@ class JohnemonWorld {
     return `Day ${this.day} has passed in JohnemonWorld!`;
   }
 
-  randomizeEvent() {}
-
   addLog(newLog) {
     const log = `Day ${this.day}: ${newLog}`;
     this.logs.push(log);
+  }
+  randomizeEvent() {
+    if (Math.random() > 0.5) {
+      console.log("Nothing happens, the day passes");
+      return true;
+    } else {
+      console.log(`A wild Johnemon™ appears ...`);
+      return false;
+    }
   }
 }
 

@@ -1,54 +1,32 @@
-
-
 class JohnemonArena {
   constructor(johnemon_1, johnemon_2) {
-
+    this.johnemon_1 = johnemon_1;
+    this.johnemon_2 = johnemon_2;
   }
 
   startBattle() {
-
-  }
-
-  chooseJohnemon() {
-  	
-  }
-
-  startRound(selectedJohnemon) {
-  	
-  }
-
-  playerAction(selectedJohnemon) {
-  	
-  }
-
-  attack(selectedJohnemon) {
     
   }
 
-  tryToCatch() {
-    
+  chooseJohnemon() {}
 
-  }
+  startRound(selectedJohnemon) {}
 
-  calculateDamage(attackRange, defenseRange) {
-    
-  }
+  playerAction(selectedJohnemon) {}
 
-  wildJohnemonAction() {
-    
-  }
+  attack(selectedJohnemon) {}
 
-  checkBattleStatus() {
-    
-  }
+  tryToCatch() {}
 
-  startNewRound() {
-    
-  }
+  calculateDamage(attackRange, defenseRange) {}
 
-  endBattle() {
-    
-  }
+  wildJohnemonAction() {}
+
+  checkBattleStatus() {}
+
+  startNewRound() {}
+
+  endBattle() {}
 }
 
-module.exports = JohnemonArena
+module.exports = JohnemonArena;

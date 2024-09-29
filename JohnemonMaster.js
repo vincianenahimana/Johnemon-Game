@@ -11,16 +11,18 @@ class JohnemonMaster {
     this.johnemonCollection.push(johnemon);
   }
 
-  renameJohnemon(johnemon, newName) {
+  renameJohnemon(johnemon, newname) {
     const selectedJohnemon = this.johnemonCollection.find(
       (j) => j.name === johnemon
     );
 
     if (selectedJohnemon !== undefined) {
-      selectedJohnemon.name = newName;
-      console.warn(`${johnemon} has been renamed`);
+      selectedJohnemon.name = newname;
+      console.warn(`${johnemon} has been renamed as ${newname}`);
+      return true;
     } else {
       console.error(`Sorry ${johnemon} doesn't exist in the collection`);
+      return false;
     }
   }
 
@@ -36,37 +38,45 @@ class JohnemonMaster {
           console.warn(
             `${johnemon} has been healed and you still have ${this.healingItems} healing items`
           );
+          return true;
         } else {
           console.warn("the healthpool is maximum");
+          return false;
         }
       } else {
         console.error(`Sorry ${johnemon} doesn't exist in the collection`);
+        return false;
       }
     } else {
       console.log("Sorry you've used up all your healing items");
+      return false;
     }
   }
 
   reviveJohnemon(johnemon) {
-    if (this.reviveItemsItems > 0) {
+    if (this.reviveItems > 0) {
       const selectedJohnemon = this.johnemonCollection.find(
         (j) => j.name === johnemon
       );
       if (selectedJohnemon !== undefined) {
         if (selectedJohnemon.healthPool < selectedJohnemon.healthPoolStart) {
           selectedJohnemon.healthPool = selectedJohnemon.healthPoolStart;
-          this.reviveItemsItems--;
+          this.reviveItems--;
           console.warn(
             `${johnemon} has been revived and you still have ${this.reviveItems} revive items`
           );
+          return true;
         } else {
           console.warn("the healthpool is maximum");
+          return false;
         }
       } else {
         console.error(`Sorry ${johnemon} doesn't exist in the collection`);
+        return false;
       }
     } else {
       console.log("Sorry you've used up all your revive items");
+      return false;
     }
   }
 
